@@ -1,8 +1,6 @@
 import cv2
 import dlib
 
-from landmarkPoints import *
-
 class FaceMarker(object):
     def __init__(self, image):
         self.image = image
@@ -13,7 +11,7 @@ class FaceMarker(object):
         detector = dlib.get_frontal_face_detector()
         self.faces = detector(self.grayImage)
 
-    def identifyFeatures(self, landmarkPoints=landmarkPoints['all'], box=False):
+    def identifyFeatures(self, landmarkPoints=[], box=False):
         for face in self.faces:
             if box:
                 self.drawBox(face)
