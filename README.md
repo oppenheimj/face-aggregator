@@ -6,7 +6,11 @@ Install requirements
 ```
 $ pip install -r requirements.txt
 ```
-Run the code
+Run the primary code
 ```
 $ py main.py
+```
+Use webcam to track face in real time
+```
+$ py sandbox/realTime.py
 ```
