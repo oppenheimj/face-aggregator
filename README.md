@@ -2,6 +2,11 @@
 <img src='docs/images/face_logo.png' width=131>
 
 # Setup
+Install requirements
 ```
-$ docker build .
+$ pip install -r requirements.txt
+```
+Run the code
+```
+$ py main.py
 ```
