@@ -1,2 +1,14 @@
 IMG_20200905_184326 -> a
 IMG_20200905_184327 -> b
+
+Jaw Points = 0–16
+Right Brow Points = 17–21
+Left Brow Points = 22–26
+Nose Points = 27–35
+Right Eye Points = 36–41
+Left Eye Points = 42–47
+Mouth Points = 48–60
+Lips Points = 61–67
+
+https://towardsdatascience.com/detecting-face-features-with-python-30385aee4a8e
+https://github.com/italojs/facial-landmarks-recognition/blob/master/shape_predictor_68_face_landmarks.dat

@@ -1,12 +1,10 @@
-# https://towardsdatascience.com/detecting-face-features-with-python-30385aee4a8e
 import cv2
 
-img = cv2.imread("files/a.jpg")
+from FaceMarker import FaceMarker
 
-cv2.imshow(winname="Face", mat=img)
+image = cv2.imread("files/a.jpg")
 
-# Wait for a key press to exit
-cv2.waitKey(delay=0)
+faceMarker = FaceMarker(image)
 
-# Close all windows
-cv2.destroyAllWindows()
+faceMarker.detectFaces()
+faceMarker.identifyFeatures()
