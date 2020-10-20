@@ -15,6 +15,7 @@ class Scene:
         else:
             self.images = images
         self.faces = self.createFaceDict()
+        print(self.faces)
 
     def getFiles(self):
         root = tk.Tk()
@@ -29,20 +30,15 @@ class Scene:
 
         Result will be a dictionary with keys as face_n and values as a list of tuples of face boundary coordinates
         """
-        # facemarkers = list()
-        # all_faces_rects = dict()
         face_centers = dict()
         centers_to_rect = dict()
         for image in self.images:
             faces = FaceMarker(cv2.imread(image)).getFaces()
-            # faces = marker.getFaces()
-            # all_faces_rects[image] = faces
             face_centers_list = list()
             for face in faces:
                 face_centers_list.append(face.center())
                 centers_to_rect[face.center()] = face
             face_centers[image] = face_centers_list
-            # facemarkers.append(marker)
 
 
 
