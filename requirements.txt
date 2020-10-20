@@ -1,3 +1,4 @@
 cmake==3.18.2.post1
 opencv-python==4.4.0.44
 dlib==19.21.0
+tk==8.5
