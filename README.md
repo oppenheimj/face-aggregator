@@ -1,6 +1,8 @@
 # face-aggregator
 <img src='docs/images/face_logo.png' width=131>
 
+# Introduction
+
 # Setup
 Install requirements
 ```
@@ -14,3 +16,5 @@ Use webcam to track face in real time
 ```
 $ py sandbox/realTime.py
 ```
+
+# Design
