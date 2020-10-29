@@ -1,3 +1,10 @@
+import dlib, cv2
+
+predictor = dlib.shape_predictor("files/shape_predictor_68_face_landmarks.dat")
+detector = dlib.get_frontal_face_detector()
+
+scaleImage = lambda image, scale: cv2.resize(image, (int(image.shape[1]*scale), int(image.shape[0]*scale)))
+
 genList = lambda start, stop: [i for i in range(start, stop+1)]
 
 landmarkPoints = {
@@ -11,3 +18,5 @@ landmarkPoints = {
     'lips': genList(61, 67),
     'all': genList(0, 67)
 }
+
+TWENTY_PERCENT = 0.2
