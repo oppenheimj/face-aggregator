@@ -1,4 +1,6 @@
 import cv2
+import math
+import numpy as np
 
 from utilities import predictor, detector, scaleImage, landmarkPoints
 from Face import Face
@@ -50,7 +52,7 @@ class Image(object):
         return differences
 
     def getFaceAreas(self, face, landmarkPoints):
-        landmarks = self.predictor(image=self.grayImage, box=face)
+        landmarks = predictor(image=self.grayImage, box=face)
 
         x, y = list(), list()
         for point in landmarkPoints:
