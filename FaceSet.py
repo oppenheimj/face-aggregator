@@ -4,12 +4,13 @@ import logging as log
 class FaceSet(object):
     def __init__(self):
         self.faces = []
-    
+
     def addFace(self, face):
         log.info(f'Adding face with center {face.center} to faceSet {self}')
         self.faces.append(face)
+        face.setFaceSet(self)
         self.computeCenter()
-    
+
     def computeCenter(self):
         xSum = 0
         ySum = 0

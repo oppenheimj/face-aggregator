@@ -7,6 +7,7 @@ class Face(object):
             'topLeft': (box.left(), box.top()),
             'bottomRight': (box.right(), box.bottom())
         }
+        self.box = box
         self.center = box.center()
         self.landmarks = landmarks
 
@@ -28,3 +29,8 @@ class Face(object):
                 color=(0, 255, 0),
                 thickness=-1
             )
+
+    def setFaceSet(self, faceSet):
+        self.faceSet = faceSet
+
+        # need to add this so we can grab the right face in the destination image to swap out

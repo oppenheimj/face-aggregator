@@ -36,3 +36,6 @@ class Batch(object):
     def draw(self):
         for image in self.images:
             image.draw()
+
+    def getFaceSets(self):
+        return self.faceSets
