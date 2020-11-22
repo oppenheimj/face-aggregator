@@ -2,6 +2,7 @@
 import os
 import cv2
 import argparse
+import logging as log
 
 from FaceSwap.face_detection import give_face
 from FaceSwap.face_swap import face_swap
@@ -20,7 +21,6 @@ class Aggregate:
     def swap_one_face(self, face):
         # will find the face in the faceset and then identify that same face in the destination image and morph it into the images
         image_copy = self.intermediary_img.copy()
-
         # the intersection the faceset of variable face and the faces in self.dest_img should be the face that will be replaced
         face_to_replace = set(self.dest_img.faces).intersection(set(face.faceSet.faces))
 
