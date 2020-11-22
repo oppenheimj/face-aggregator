@@ -23,6 +23,7 @@ class Aggregate:
         image_copy = self.intermediary_img.copy()
         # the intersection the faceset of variable face and the faces in self.dest_img should be the face that will be replaced
         face_to_replace = set(self.dest_img.faces).intersection(set(face.faceSet.faces))
+        print("face to replace in destination image", face_to_replace)
 
         src_points, src_shape, src_face = give_face(face.parentImage.image, face)
         # Select dst face
@@ -34,10 +35,11 @@ class Aggregate:
 
         output = face_swap(src_face, dst_face, src_points, dst_points, dst_shape, image_copy)
 
-        self.intermediary_img = image_copy.copy()
+        self.intermediary_img = output.copy()
 
     def swap_all_faces(self, out_path="scene.jpg"):
         for face in self.faces:
+            print("taking this face and putting it on destination image:", face)
             self.swap_one_face(face)
 
         cv2.imwrite(os.path.join(os.getcwd(), "files", out_path), self.intermediary_img)
