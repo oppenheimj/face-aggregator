@@ -1,4 +1,6 @@
 import cv2
+import math
+from log import log
 
 class Face(object):
     def __init__(self, parentImage, box, landmarks):

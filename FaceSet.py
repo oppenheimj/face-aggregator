@@ -1,5 +1,5 @@
 import numpy as np
-import logging as log
+from log import log
 
 class FaceSet(object):
     def __init__(self):

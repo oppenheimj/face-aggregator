@@ -1,10 +1,8 @@
 import cv2
-import logging as log
 
+from log import log
 from BatchLoader import BatchLoader
 from Aggregate import Aggregate
-
-log.basicConfig(level=log.INFO)
 
 batch = BatchLoader().browse()
 batch.detectFaces()
