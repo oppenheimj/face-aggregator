@@ -12,5 +12,5 @@ batch.generateFaceSets()
 faceSets = batch.getFaceSets()
 ag = Aggregate(batch, batch.images[0], batch.images[1].getFaces())
 # put onto a.jpg, the girl's face from b.jpg
-ag.swap_all_faces("test.jpg")
+ag.swapAllFaces("test.jpg")
 # batch.draw()
