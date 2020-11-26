@@ -11,6 +11,9 @@ class Image(object):
         self.image = scaleImage(image, scale) if scale else image
         self.grayImage = cv2.cvtColor(src=self.image, code=cv2.COLOR_BGR2GRAY)
 
+    def getFaces(self):
+        return self.faces
+
     def detectFaces(self):
         self.faces = []
 
