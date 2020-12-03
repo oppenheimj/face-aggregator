@@ -33,6 +33,10 @@ class Batch(object):
 
                     self.faceSets[faceSetIndex].addFace(face)
 
+    def identifyHappiestFaces(self):
+        for faceSet in self.faceSets:
+            faceSet.identifyHappiestFace()
+
     def draw(self):
         for image in self.images:
             image.draw()
