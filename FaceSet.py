@@ -18,7 +18,7 @@ class FaceSet(object):
 
         self.happiest = score2Face[bestScore]
 
-        log.info(f'Happiest face {id(self.happiest)} with score {bestScore} from image {id(self.happiest.parentImage)}')
+        log.info(f"Happiest face {id(self.happiest)} with score {bestScore} from image {self.happiest.parentImage.path[self.happiest.parentImage.path.rfind('/')+1:]}")
 
     def computeCenter(self):
         xSum = 0
