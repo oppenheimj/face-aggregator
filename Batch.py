@@ -3,10 +3,12 @@ import os, cv2, math
 from Image import Image
 from FaceSet import FaceSet
 from utilities import TWENTY_PERCENT
+from log import log
 
 class Batch(object):
-    def __init__(self, images):
-        self.images = [Image(self, image, TWENTY_PERCENT) for image in images]
+    def __init__(self, images_paths):
+        # log.info(f"Brought into Batch class {images_paths}")
+        self.images = [Image(self, image, path, TWENTY_PERCENT) for image, path in images_paths]
 
     def detectFaces(self):
         for image in self.images:
@@ -43,3 +45,6 @@ class Batch(object):
 
     def getFaceSets(self):
         return self.faceSets
+
+    def __len__(self):
+        return len(self.images)

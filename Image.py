@@ -1,15 +1,17 @@
 import cv2
 import math
+from log import log
 import numpy as np
 
 from utilities import predictor, detector, scaleImage, landmarkPoints
 from Face import Face
 
 class Image(object):
-    def __init__(self, batch, image, scale=0):
+    def __init__(self, batch, image, path, scale=0):
         self.batch = batch
         self.image = scaleImage(image, scale) if scale else image
         self.grayImage = cv2.cvtColor(src=self.image, code=cv2.COLOR_BGR2GRAY)
+        self.path = path
 
     def getFaces(self):
         return self.faces
@@ -17,19 +19,22 @@ class Image(object):
     def detectFaces(self):
         self.faces = []
 
-        for box in detector(self.grayImage):
+        for i, box in enumerate(detector(self.grayImage)):
             landmarks = predictor(image=self.grayImage, box=box)
             landmarkPts = [(landmarks.part(pt).x, landmarks.part(pt).y) for pt in landmarkPoints['all']]
             self.faces.append(Face(self, box, landmarkPts))
 
+        log.info(f"Number of faces in image: {len(self.faces)}")
+
     def draw(self):
         for face in self.faces:
+            face.getSmileScore()
             face.drawBox()
             face.drawLandmarks()
 
         cv2.imshow(winname=f'Face{"s" if len(self.faces) > 1 else ""}', mat=self.image)
-        cv2.waitKey(delay=0)
-        cv2.destroyAllWindows()
+        # cv2.waitKey(delay=0)
+        # cv2.destroyAllWindows()
 
     # ehhhh maybe we shouldn't use this
     def getLandmarksValue(self, face, landmarkPoints):
