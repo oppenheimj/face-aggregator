@@ -14,7 +14,7 @@ def face_detection(img,upsample_times=1):
 
     return faces
 
-PREDICTOR_PATH = os.path.join(os.getcwd(),'files/shape_predictor_68_face_landmarks.dat')
+PREDICTOR_PATH = os.path.join(os.getcwd(),'files/models/shape_predictor_68_face_landmarks.dat')
 print(PREDICTOR_PATH)
 predictor = dlib.shape_predictor(PREDICTOR_PATH)
 ## Face and points detection

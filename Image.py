@@ -3,7 +3,9 @@ import math
 from log import log
 import numpy as np
 
-from utilities import predictor, detector, scaleImage, landmarkPoints
+from utilities import scaleImage, landmarkPoints
+from models import predictor, detector, net
+import dlib
 from Face import Face
 
 class Image(object):
@@ -16,7 +18,8 @@ class Image(object):
     def getFaces(self):
         return self.faces
 
-    def detectFaces(self):
+    def detectFacesOld(self):
+        print('OLD DETECT FACES')
         self.faces = []
 
         for box in detector(self.grayImage):
@@ -25,6 +28,36 @@ class Image(object):
             self.faces.append(Face(self, box, landmarkPts))
 
         log.info(f"Number of faces in image: {len(self.faces)}")
+
+    def detectFaces(self):
+        # self.detectFacesOld()
+        self.detectFacesNew()
+
+    def detectFacesNew(self):
+        self.faces = []
+
+        frameHeight, frameWidth = self.grayImage.shape
+
+        # self.detectFacesOld()
+        print('NEW DETECT FACES')
+
+        blob = cv2.dnn.blobFromImage(self.image)
+        net.setInput(blob)
+        detections = net.forward()
+
+        conf_threshold=0.5
+
+        for i in range(detections.shape[2]):
+            confidence = detections[0, 0, i, 2]
+            if confidence > conf_threshold:
+                x1 = int(detections[0, 0, i, 3] * frameWidth)
+                y1 = int(detections[0, 0, i, 4] * frameHeight)
+                x2 = int(detections[0, 0, i, 5] * frameWidth)
+                y2 = int(detections[0, 0, i, 6] * frameHeight)
+                box = dlib.rectangle(left=x1, top=y1, right=x2, bottom=y2)
+                landmarks = predictor(image=self.grayImage, box=box)
+                landmarkPts = [(landmarks.part(pt).x, landmarks.part(pt).y) for pt in landmarkPoints['all']]
+                self.faces.append(Face(self, box, landmarkPts))
 
     def draw(self, webcam=False):
         for face in self.faces:

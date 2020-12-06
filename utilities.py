@@ -1,7 +1,4 @@
-import dlib, cv2
-
-predictor = dlib.shape_predictor("files/shape_predictor_68_face_landmarks.dat")
-detector = dlib.get_frontal_face_detector()
+import cv2
 
 scaleImage = lambda image, scale: cv2.resize(image, (int(image.shape[1]*scale), int(image.shape[0]*scale)))
 
