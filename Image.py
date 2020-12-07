@@ -19,22 +19,24 @@ class Image(object):
     def detectFaces(self):
         self.faces = []
 
-        for i, box in enumerate(detector(self.grayImage)):
+        for box in detector(self.grayImage):
             landmarks = predictor(image=self.grayImage, box=box)
             landmarkPts = [(landmarks.part(pt).x, landmarks.part(pt).y) for pt in landmarkPoints['all']]
             self.faces.append(Face(self, box, landmarkPts))
 
         log.info(f"Number of faces in image: {len(self.faces)}")
 
-    def draw(self):
+    def draw(self, webcam=False):
         for face in self.faces:
-            face.getSmileScore()
+            if webcam:
+                face.getSmileScore()
             face.drawBox()
             face.drawLandmarks()
 
         cv2.imshow(winname=f'Face{"s" if len(self.faces) > 1 else ""}', mat=self.image)
-        # cv2.waitKey(delay=0)
-        # cv2.destroyAllWindows()
+        if not webcam:
+            cv2.waitKey(delay=0)
+            cv2.destroyAllWindows()
 
     # ehhhh maybe we shouldn't use this
     def getLandmarksValue(self, face, landmarkPoints):

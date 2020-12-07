@@ -14,6 +14,9 @@ class BatchLoader(object):
         root.withdraw()
 
         filePaths = filedialog.askopenfilenames()
+        while len(filePaths) <= 1:
+            log.warn("Not enough images were uploaded to aggregate faces. Please try again")
+            filePaths = filedialog.askopenfilenames()
         images = [(cv2.imread(path), path) for path in filePaths]
         # log.info(f"Images and paths being sent to Batch {images}")
 
