@@ -7,9 +7,9 @@ cap = cv2.VideoCapture(0)
 
 while True:
     _, frame = cap.read()
-    image = Image(None, frame)
+    image = Image(None, frame, None)
     image.detectFaces()
-    image.draw()
+    image.draw(True)
 
     # Exit when escape is pressed
     if cv2.waitKey(delay=1) == 27:
