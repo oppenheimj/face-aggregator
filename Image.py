@@ -22,7 +22,7 @@ class Image(object):
 
     def detectFaces(self):
         # This confidence threshold can be tuned. 96% seems to work well.
-        boxes = detectFaceBoxes(self.image, confThreshold=0.96)
+        boxes = detectFaceBoxes(self, confThreshold=0.96)
         self.faces = [Face(self, box, detectLandmarks(self.grayImage, box)) for box in boxes]
 
     def draw(self, webcam=False):

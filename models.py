@@ -1,4 +1,5 @@
 import dlib, cv2
+import numpy as np
 
 from utilities import landmarkPoints
 from log import log
@@ -11,25 +12,20 @@ def detectLandmarks(image, box):
 
     return [(landmarks.part(pt).x, landmarks.part(pt).y) for pt in landmarkPoints['all']]
 
-def detectFaceBoxes(image, confThreshold):
+def detectFaceBoxes(Image, confThreshold):
     modelFile = f'{MODELS_PATH}opencv_face_detector_uint8.pb'
     configFile = f'{MODELS_PATH}opencv_face_detector.pbtxt'
     net = cv2.dnn.readNetFromTensorflow(modelFile, configFile)
 
-    blob = cv2.dnn.blobFromImage(image)
+    blob = cv2.dnn.blobFromImage(Image.image)
     net.setInput(blob)
     detections = net.forward()
 
-    boxes = []
+    faceMask = detections[0, 0, :, 2] > confThreshold
+    numFaces = np.count_nonzero(faceMask)
+    log.info(f'{Image.fileName}: Detected {numFaces} faces with confidence > {confThreshold}%')
 
-    for i in range(detections.shape[2]):
-        confidence = detections[0, 0, i, 2]
-        log.info(f'Detected face with confidence {confidence}')
-
-        if confidence > confThreshold:
-            boxes.append(_detectionToBox(image, detections[0, 0, i]))
-
-    return boxes
+    return [_detectionToBox(Image.image, face) for face in detections[0, 0, faceMask]]
 
 def _detectionToBox(image, detection):
     frameHeight, frameWidth, _ = image.shape
