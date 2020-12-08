@@ -7,8 +7,8 @@ from log import log
 
 class Batch(object):
     def __init__(self, images_paths):
-        # log.info(f"Brought into Batch class {images_paths}")
-        self.images = [Image(self, image, path, TWENTY_PERCENT) for image, path in images_paths]
+        # TODO: Intelligently scale images using smallest dimension
+        self.images = [Image(self, image, path, 0.2) for image, path in images_paths]
 
     def detectFaces(self):
         for image in self.images:
