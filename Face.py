@@ -57,5 +57,3 @@ class Face(object):
 
     def setFaceSet(self, faceSet):
         self.faceSet = faceSet
-
-        # need to add this so we can grab the right face in the destination image to swap out
