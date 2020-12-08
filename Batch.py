@@ -7,8 +7,8 @@ from log import log
 
 class Batch(object):
     def __init__(self, images_paths):
-        # log.info(f"Brought into Batch class {images_paths}")
-        self.images = [Image(self, image, path, TWENTY_PERCENT) for image, path in images_paths]
+        # TODO: Intelligently scale images using smallest dimension
+        self.images = [Image(self, image, path, 0.2) for image, path in images_paths]
 
     def detectFaces(self):
         for image in self.images:
@@ -43,23 +43,18 @@ class Batch(object):
         return [faceSet.happiest for faceSet in self.faceSets]
 
     def getUserScene(self):
-        # Get the image paths
-        images_paths = {i: (image, image.path) for i, image in enumerate(self.images)}
-        print()
-        for key, (image, path) in images_paths.items():
-            print(f"{key}: {path[path.rfind('/')+1:]}")
-        try:
-            chosen_image_index = int(input("Please type in the number corresponding to the image you want all the faces to end up on:\n"))
-        except ValueError:
-            chosen_image_index = -1
-            print("That was not an integer")
+        for i, image in enumerate(self.images):
+            print(f'({i}) {image.fileName}')
+
+        chosen_image_index = -1
         while not 0 <= chosen_image_index < len(self):
             try:
-                chosen_image_index = int(input("Choose only one of the numbers on the terminal:\n"))
+                chosen_image_index = int(input("Enter a number corresponding to the image file you want all the faces to end up on:\n"))
             except ValueError:
                 chosen_image_index = -1
-                print("That was not an integer")
-        return images_paths[chosen_image_index][0]
+                print(f'Please enter an integer between 0 and {len(self)-1} (inclusive)')
+
+        return self.images[chosen_image_index]
 
     def draw(self):
         for image in self.images:
