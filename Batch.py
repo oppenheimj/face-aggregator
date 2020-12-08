@@ -47,7 +47,7 @@ class Batch(object):
         images_paths = {i: (image, image.path) for i, image in enumerate(self.images)}
         print()
         for key, (image, path) in images_paths.items():
-            print(f"{key}: {path[path.rfind('/')+1:]}")
+            print(f"{key}: {image.fileName}")
         try:
             chosen_image_index = int(input("Please type in the number corresponding to the image you want all the faces to end up on:\n"))
         except ValueError:

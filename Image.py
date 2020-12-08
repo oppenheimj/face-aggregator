@@ -15,6 +15,7 @@ class Image(object):
         self.image = scaleImage(image, scale) if scale else image
         self.grayImage = cv2.cvtColor(src=self.image, code=cv2.COLOR_BGR2GRAY)
         self.path = path
+        self.fileName = path[path.rfind('/')+1:]
 
     def getFaces(self):
         return self.faces
