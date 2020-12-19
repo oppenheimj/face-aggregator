@@ -35,4 +35,6 @@ def _detectionToBox(image, detection):
     x2 = int(detection[5] * frameWidth)
     y2 = int(detection[6] * frameHeight)
 
+    y1 += int((y2 - y1)*0.25)
+
     return dlib.rectangle(left=x1, top=y1, right=x2, bottom=y2)

@@ -1,6 +1,3 @@
-IMG_20200905_184326 -> a
-IMG_20200905_184327 -> b
-
 Jaw Points = 0–16
 Right Brow Points = 17–21
 Left Brow Points = 22–26
